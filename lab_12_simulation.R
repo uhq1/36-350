@@ -26,12 +26,13 @@ run_simulation = function(n_trials = 1000, n = c(100, 1000, 10000),
     summ = summary(result)
     return(summ$coefficients[-1,"Pr(>|t|)"])
   }
-  for (i in 1:length(combs)){
+  for (i in 1:nrow(combs)){
     trials = unlist(replicate(n_trials, helper(combs[i,1], combs[i,2], cutoff)))
     png(paste('trial',i,'.png', sep=''))
     hist(trials, xlab = "p-value", main = paste('Trial',i,sep=" "))
     dev.off()   
   }
+  
 }
 
 run_simulation()
